@@ -125,6 +125,20 @@ __PACKAGE__->belongs_to(
 # Created by DBIx::Class::Schema::Loader v0.07035 @ 2013-05-18 15:25:26
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZS8nlxmRmQosGJOTFMT1QQ
 
+use Estatium::Conf;
+use Digest::SHA qw(sha1_hex);
+
+sub is_password_valid {
+    my ($self, $password) = @_;
+
+    return $self->password_hash eq $self->get_password_hash($password);
+}
+
+sub get_password_hash {
+    my ($self, $password) = @_;
+
+    return sha1_hex($password, Estatium::Conf::get('password_salt'));
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;
