@@ -9,8 +9,8 @@ use HTTP::Status qw(:constants);
 sub login {
     my $self = shift;
 
-    my $email    = $self->param('email');
-    my $password = $self->param('password');
+    my $email    = $self->req->json->{email};
+    my $password = $self->req->json->{password};
 
     my $user
         = Estatium::DB->schema->resultset('User')->find({ email => $email })
