@@ -5,6 +5,8 @@ use Mojo::Base 'Mojolicious';
 sub startup {
     my $self = shift;
 
+    srand;
+
     $app->secret('nvlsjknlkj12n4-12897u098hn');
 
     # Router
