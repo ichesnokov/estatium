@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo 'CREATE DATABASE estatium DEFAULT CHARACTER SET utf8;' | mysql -u root

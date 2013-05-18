@@ -1,0 +1,14 @@
+#!/usr/bin/env perl
+use lib::abs qw(../lib);
+use Estatium::DB;
+use aliased 'DBIx::Class::DeploymentHandler' => 'DH';
+
+my $s = Estatium::DB->schema();
+my $dh = DH->new({
+    schema              => $s,
+    databases           => 'MySQL',
+    sql_translator_args => { add_drop_table => 1 },
+});
+
+$dh->prepare_install;
+$dh->install;
