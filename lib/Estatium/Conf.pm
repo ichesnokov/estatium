@@ -7,7 +7,6 @@ read_config();
 my $config;
 sub read_config {
     my $config_file = lib::abs::path('../../conf/conf.pl');
-    say "config: $config_file";
     $config = do $config_file;
 }
 
