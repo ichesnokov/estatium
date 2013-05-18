@@ -90,6 +90,20 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<email>
+
+=over 4
+
+=item * L</email>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("email", ["email"]);
+
 =head1 RELATIONS
 
 =head2 role
@@ -108,8 +122,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07035 @ 2013-05-18 14:47:25
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:m1zO3UrFiE6GHPxP2IBwwg
+# Created by DBIx::Class::Schema::Loader v0.07035 @ 2013-05-18 15:25:26
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZS8nlxmRmQosGJOTFMT1QQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
