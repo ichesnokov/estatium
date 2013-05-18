@@ -1,0 +1,2 @@
+#!/bin/sh
+dbicdump -o dump_directory=./lib Estatium::DB 'dbi:mysql:database=estatium' root ''
