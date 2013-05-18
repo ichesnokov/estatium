@@ -2,23 +2,39 @@ package Estatium::Web::Estate;
 use Mojo::Base 'Mojolicious::Controller';
 
 use Estatium::DB;
+use HTTP::Status qw(:constants);
 
 sub schema { Estatium::DB->schema }
 
 # Create an estate object
+
+=head3 POST /estate
+
+    In: \%estate
+        name - required
+        square - required
+        price
+        commission
+        address
+        metro_station
+        latitude
+        longtitude
+        contact_phone - required
+
+    Out: \%result
+        success - on success
+        error   - on error
+
+=cut
+
 sub create {
     my $self = shift;
 
     eval {
-        $self->schema->resultset('Estate')->create(
-            {
-                map { $_ => $self->param($_) } qw(
-                    name square price commission address
-                    latitude longitude metro_station
-                    contact_phone
-                )
-            }
-        );
+        my $estate_hash = $self->req->json;
+        delete $estate_hash->{id}; # Just in case
+
+        $self->schema->resultset('Estate')->create($estate_hash)
     } or return $self->render(
         status => HTTP_INTERNAL_SERVER_ERROR,
         json   => { error => $@ }
