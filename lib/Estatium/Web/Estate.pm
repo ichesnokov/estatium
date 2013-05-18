@@ -47,6 +47,25 @@ sub create {
     );
 }
 
+# XXX: I'm not sure that it works
+sub list {
+    my $self = shift;
+
+    my $page = $self->param('page') || 0;
+    my $rows = $self->param('rows') || 10;
+
+    my $rs = $self->estate_rs;
+    $rs = ->search->page($page);
+    $rs->result_class('DBIx::Class::ResultClass::HashRefInflator');
+    return $self->render(
+        json => {
+            estates => [ $rs->all ],
+            page        => $page,
+            total_pages => $rs->pager->last_page,
+        },
+    );
+}
+
 sub get {
     my $self = shift;
 
