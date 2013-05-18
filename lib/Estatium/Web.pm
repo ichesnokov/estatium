@@ -5,7 +5,7 @@ use Mojo::Base 'Mojolicious';
 sub startup {
     my $self = shift;
 
-    $app->secret('nvlsjknlkj12n4-12897u098hn');
+    $self->secret('nvlsjknlkj12n4-12897u098hn');
 
     # Router
     my $r = $self->routes;
