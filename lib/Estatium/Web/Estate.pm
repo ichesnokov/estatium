@@ -49,7 +49,18 @@ sub create {
 
 sub get {
     my $self = shift;
-    ...;
+
+    my $estate_id = $self->param('estate_id');
+    $self->app->log->debug("estate id: $estate_id");
+
+    my $rs = $self->estate_rs;
+    $rs->result_class('DBIx::Class::ResultClass::HashRefInflator');
+    my $estate = $rs->find($estate_id)
+        or return $self->render(
+            status => HTTP_NOT_FOUND,
+            json   => { estate => { not_found => $estate_id } },
+        );
+    $self->render(json => $estate);
 }
 
 sub search {
