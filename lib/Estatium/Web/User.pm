@@ -33,7 +33,7 @@ sub login {
 }
 
 sub _session_token {
-    return sha1_hex(srand(time) ^ $$);
+    return sha1_hex(rand(time) ^ $$);
 }
 
 1;
