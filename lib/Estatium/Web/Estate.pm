@@ -5,6 +5,7 @@ use Estatium::DB;
 use HTTP::Status qw(:constants);
 
 sub schema { Estatium::DB->schema }
+sub estate_rs { shift->schema->resultset('Estate') }
 
 # Create an estate object
 
@@ -34,7 +35,7 @@ sub create {
         my $estate_hash = $self->req->json;
         delete $estate_hash->{id}; # Just in case
 
-        $self->schema->resultset('Estate')->create($estate_hash)
+        $self->estate_rs->create($estate_hash);
     } or return $self->render(
         status => HTTP_INTERNAL_SERVER_ERROR,
         json   => { error => $@ }
