@@ -14,11 +14,10 @@ sub login {
 
     my $user
         = Estatium::DB->schema->resultset('User')->find({ email => $email })
-        or do {
-        $self->res->code(HTTP_NOT_FOUND);
-        return $self->render(
-            json => { error => { email => { not_found => $email } } });
-        };
+        or return $self->render(
+            status => HTTP_NOT_FOUND,
+            json   => { error => { email => { not_found => $email } } }
+        );
 
     if ($user->is_password_valid($password)) {
         my $token = $self->_session_token();
@@ -27,9 +26,9 @@ sub login {
         return $self->render(json => { authenticated => 1 });
     }
 
-    $self->res->code(HTTP_UNAUTHORIZED);
     return $self->render(
-        json => { error => { password => { invalid => $password } } }
+        status => HTTP_UNAUTHORIZED,
+        json   => { error => { authentication => { failed => 1 } } }
     );
 }
 
