@@ -61,6 +61,12 @@ __PACKAGE__->table("user");
   is_nullable: 0
   size: 255
 
+=head2 token
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 40
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -76,6 +82,8 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", default_value => "", is_nullable => 0, size => 255 },
   "last_name",
   { data_type => "varchar", default_value => "", is_nullable => 0, size => 255 },
+  "token",
+  { data_type => "varchar", is_nullable => 1, size => 40 },
 );
 
 =head1 PRIMARY KEY
@@ -104,6 +112,18 @@ __PACKAGE__->set_primary_key("id");
 
 __PACKAGE__->add_unique_constraint("email", ["email"]);
 
+=head2 C<token>
+
+=over 4
+
+=item * L</token>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("token", ["token"]);
+
 =head1 RELATIONS
 
 =head2 role
@@ -122,8 +142,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07035 @ 2013-05-18 15:25:26
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZS8nlxmRmQosGJOTFMT1QQ
+# Created by DBIx::Class::Schema::Loader v0.07035 @ 2013-05-18 20:42:24
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0TNqEVmdQ4tNBbJTdFYvyw
 
 use Estatium::Conf;
 use Digest::SHA qw(sha1_hex);

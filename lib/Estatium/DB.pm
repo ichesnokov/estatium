@@ -16,7 +16,7 @@ __PACKAGE__->load_namespaces;
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NqStz6qikQuX3fCecOTMNg
 
 # Version for DBIx::Class::DeploymentHandler
-our $VERSION = 3;
+our $VERSION = 4;
 
 use Estatium::Conf;
 

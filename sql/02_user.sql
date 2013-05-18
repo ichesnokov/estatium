@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS user (
     role_id INTEGER NOT NULL,
     first_name VARCHAR(255) NOT NULL DEFAULT '',
     last_name VARCHAR(255) NOT NULL DEFAULT '',
+    token VARCHAR(40) DEFAULT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (email),
+    UNIQUE KEY (token),
     CONSTRAINT FOREIGN KEY (`role_id`) REFERENCES `role`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8;
