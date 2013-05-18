@@ -3,16 +3,13 @@ use Mojo::Base 'Mojolicious';
 
 # This method will run once at server start
 sub startup {
-  my $self = shift;
+    my $self = shift;
 
-  # Documentation browser under "/perldoc"
-  $self->plugin('PODRenderer');
+    $app->secret('nvlsjknlkj12n4-12897u098hn');
 
-  # Router
-  my $r = $self->routes;
-
-  # Normal route to controller
-  $r->get('/')->to('example#welcome');
+    # Router
+    my $r = $self->routes;
+    $r->post('/user/login')->to('user#login');
 }
 
 1;
