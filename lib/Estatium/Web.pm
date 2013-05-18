@@ -25,7 +25,7 @@ sub startup {
                 && Estatium::DB->schema->resultset('User')->find(
                     { token => $c->session->{token} }
                 );
-            $self->render(json => { login => { failed => 1 } });
+            $self->render(json => { authentication => { required => 1 } });
             return;
         }
     );
